@@ -6,6 +6,6 @@ module br.edu.up.sistema_rpg {
 
     opens br.edu.up.sistema_rpg to javafx.fxml;
     exports br.edu.up.sistema_rpg;
-    exports br.edu.up.sistema_rpg.controller;
-    opens br.edu.up.sistema_rpg.controller to javafx.fxml;
+    exports br.edu.up.sistema_rpg.ui;
+    opens br.edu.up.sistema_rpg.ui to javafx.fxml;
 }
