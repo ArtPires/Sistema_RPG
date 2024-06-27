@@ -7,9 +7,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class ControllerRPG implements Initializable {
+public class ViewRPG implements Initializable {
 
     private SistemaController conn = new SistemaController();
 
@@ -117,24 +118,44 @@ public class ControllerRPG implements Initializable {
         });
 
         chbClasse.setOnAction(e -> {
-            Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-            dialog.setTitle("Info");
-            dialog.setHeaderText("Numero de perícias treinadas: " + getPericiasTreinadas());
-            dialog.showAndWait();
-            vbPericias.setDisable(false);
+            if (!Objects.equals(txfInteligencia.getText(), "")) {
+                Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+                dialog.setTitle("Info");
+                dialog.setHeaderText("Numero de perícias treinadas: " + getPericiasTreinadas());
+                dialog.showAndWait();
+                liebrarPericias();
+            } else {
+                Alert dialog = new Alert(Alert.AlertType.ERROR);
+                dialog.setTitle("ERRO");
+                dialog.setHeaderText("Preencha todos os campos de Habilidades antes de selecionar uma Classe!");
+                dialog.showAndWait();
+                chbClasse.setValue("");
+            }
         });
+    }
 
+    private void initChoiceBox() {
+        chbClasse.getItems().addAll("Bardo", "Guerreiro");
+        chbRaca.getItems().addAll("Anão", "Elfo", "Humano");
     }
 
     private String getPericiasTreinadas() {
         String classe = chbClasse.getValue();
         try {
             return Integer.toString(conn.calcPericiasTreinadas(classe, txfInteligencia.getText()));
-        } catch (RuntimeException e){
-            e.getMessage();
+        } catch (Exception e){
+            Alert dialog = new Alert(Alert.AlertType.ERROR);
+            dialog.setTitle("ERRO");
+            dialog.setHeaderText(e.fillInStackTrace().toString());
+            dialog.showAndWait();
         }
         return null;
     }
+
+    private void liebrarPericias() {
+        vbPericias.setDisable(false);
+    }
+
 
     private void printarInfo() {
         System.out.println("Nome: " + txfNome.getText());
@@ -146,10 +167,5 @@ public class ControllerRPG implements Initializable {
         System.out.println("Inteligencia: " + txfInteligencia.getText());
         System.out.println("Sabedoria: " + txfSabedoria.getText());
         System.out.println("Carisma: " + txfCarisma.getText());
-    }
-
-    private void initChoiceBox() {
-        chbClasse.getItems().addAll("Bardo", "Guerreiro", "Ladino", "Mago", "Paladino");
-        chbRaca.getItems().addAll("Anão", "Elfo", "Humano", "Goblin");
     }
 }

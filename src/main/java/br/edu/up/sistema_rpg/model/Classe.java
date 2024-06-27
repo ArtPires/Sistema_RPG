@@ -1,12 +1,15 @@
 package br.edu.up.sistema_rpg.model;
 
-public class Classe {
+import br.edu.up.sistema_rpg.model.utils.HabilidadesDeRaca;
 
-    private Integer numPericiasTreinadas;
+import java.util.ArrayList;
 
-    public Classe () {
+public interface Classe {
 
-    }
+    Integer calcularValorDePericias();
 
+    Integer calcularModificadorDePericias();
+
+    ArrayList<HabilidadesDeRaca> preencherHabilidades();
 
 }
