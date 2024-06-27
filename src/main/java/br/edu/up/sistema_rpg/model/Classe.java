@@ -1,12 +1,8 @@
 package br.edu.up.sistema_rpg.model;
 
-public class Classe {
+public interface Classe {
 
-    private Integer numPericiasTreinadas;
+    void adicionarPericias();
 
-    public Classe () {
-
-    }
-
-
+    Integer calcularValorDePericias();
 }

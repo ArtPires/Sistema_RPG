@@ -130,7 +130,7 @@ public class ControllerRPG implements Initializable {
         String classe = chbClasse.getValue();
         try {
             return Integer.toString(conn.calcPericiasTreinadas(classe, txfInteligencia.getText()));
-        } catch (RuntimeException e){
+        } catch (Exception e){
             e.getMessage();
         }
         return null;

@@ -33,11 +33,8 @@ public class Main extends Application {
         ArrayList<Integer> array = new ArrayList<>(d4.jogarDados(5));
 
         for (Integer num : array){
-            int i = 1;
-            System.out.println(i + "° Valor no array: " + num);
-            i++;
+            System.out.println("Valor no array: " + num);
         }
-
 
         launch();
     }
