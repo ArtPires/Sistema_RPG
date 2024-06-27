@@ -217,6 +217,6 @@ public class ViewRPG implements Initializable {
     }
 
     private void adicionarDistancia(){
-        txfAtaqueDistancia.setText(String.valueOf(conn.calcularCorpo(chbClasse.getValue(), txfDestreza.getText())));
+        txfAtaqueDistancia.setText(String.valueOf(conn.calcularDistancia(chbClasse.getValue(), txfDestreza.getText())));
     }
 }
