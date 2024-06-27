@@ -128,8 +128,12 @@ public class ControllerRPG implements Initializable {
 
     private String getPericiasTreinadas() {
         String classe = chbClasse.getValue();
-
-        return Integer.toString(conn.calcPericiasTreinadas(classe, txfInteligencia.getText()));
+        try {
+            return Integer.toString(conn.calcPericiasTreinadas(classe, txfInteligencia.getText()));
+        } catch (RuntimeException e){
+            e.getMessage();
+        }
+        return null;
     }
 
     private void printarInfo() {

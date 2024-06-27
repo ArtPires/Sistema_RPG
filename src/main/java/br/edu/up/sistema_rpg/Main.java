@@ -1,5 +1,6 @@
 package br.edu.up.sistema_rpg;
 
+import br.edu.up.sistema_rpg.model.dados.D4;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends Application {
     @Override
@@ -22,6 +24,21 @@ public class Main extends Application {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
+        D4 d4 = new D4();
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(d4.jogarDado());
+        }
+
+        ArrayList<Integer> array = new ArrayList<>(d4.jogarDados(5));
+
+        for (Integer num : array){
+            int i = 1;
+            System.out.println(i + "° Valor no array: " + num);
+            i++;
+        }
+
+
         launch();
     }
 }
