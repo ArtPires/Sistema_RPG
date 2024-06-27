@@ -2,19 +2,27 @@ package br.edu.up.sistema_rpg.controller;
 
 import br.edu.up.sistema_rpg.model.classes.Bardo;
 import br.edu.up.sistema_rpg.model.classes.Guerreiro;
+import br.edu.up.sistema_rpg.model.dados.*;
 import br.edu.up.sistema_rpg.model.racas.Anao;
 import br.edu.up.sistema_rpg.model.racas.Elfo;
 import br.edu.up.sistema_rpg.model.racas.Humano;
 import br.edu.up.sistema_rpg.model.utils.Modificadores;
-import br.edu.up.sistema_rpg.model.utils.arquivos.Habilidades;
+import br.edu.up.sistema_rpg.model.utils.Habilidades;
 
-import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 
 public class SistemaController {
     private final Anao anao = new Anao();
     private final Elfo elfo = new Elfo();
     private final Humano humano = new Humano();
+
+    private D4 d4 = new D4();
+    private D6 d6 = new D6();
+    private D8 d8 = new D8();
+    private D10 d10 = new D10();
+    private D12 d12 = new D12();
+    private D20 d20 = new D20();
+    private D100 d100 = new D100();
 
     public SistemaController(){ }
 
@@ -60,6 +68,19 @@ public class SistemaController {
             case "Bardo" -> Modificadores.calcModificador(valorDestreza);
             case "Guerreiro" -> Modificadores.calcModificador(valorDestreza) + 1;
             default -> 10;
+        };
+    }
+
+    public ArrayList<Integer> rolarDados(String quantidade, String tipoDado) {
+        return switch (tipoDado) {
+            case "D4" -> d4.jogarDados(Integer.parseInt(quantidade));
+            case "D6" -> d6.jogarDados(Integer.parseInt(quantidade));
+            case "D8" -> d8.jogarDados(Integer.parseInt(quantidade));
+            case "D10" -> d10.jogarDados(Integer.parseInt(quantidade));
+            case "D12" -> d12.jogarDados(Integer.parseInt(quantidade));
+            case "D20" -> d20.jogarDados(Integer.parseInt(quantidade));
+            case "D100" -> d100.jogarDados(Integer.parseInt(quantidade));
+            default -> null;
         };
     }
 }

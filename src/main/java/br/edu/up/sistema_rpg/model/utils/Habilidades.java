@@ -1,4 +1,4 @@
-package br.edu.up.sistema_rpg.model.utils.arquivos;
+package br.edu.up.sistema_rpg.model.utils;
 
 public class Habilidades {
 

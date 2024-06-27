@@ -2,7 +2,7 @@ package br.edu.up.sistema_rpg.ui;
 
 import br.edu.up.sistema_rpg.controller.SistemaController;
 import br.edu.up.sistema_rpg.model.utils.FileManager;
-import br.edu.up.sistema_rpg.model.utils.arquivos.Habilidades;
+import br.edu.up.sistema_rpg.model.utils.Habilidades;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -63,15 +62,19 @@ public class ViewRPG implements Initializable {
         initChoiceBox();
 
         vbPericias.setDisable(true);
+        tabDados.setDisable(true);
+        labelResult.setText("");
 
         btSalvar.setOnAction(e -> {
             salvarPersonagem();
             preencerFicha();
             privarTudo();
+            tabDados.setDisable(false);
         });
 
         btDado.setOnAction(e -> {
-            liberarTudo();
+            labelResult.setText("");
+            labelResult.setText(String.valueOf(conn.rolarDados(txfQuantidade.getText(), chbDado.getValue())));
         });
 
         btEditar.setOnAction(e -> {
@@ -161,6 +164,7 @@ public class ViewRPG implements Initializable {
     private void initChoiceBox() {
         chbClasse.getItems().addAll("Bardo", "Guerreiro");
         chbRaca.getItems().addAll("Anão", "Elfo", "Humano");
+        chbDado.getItems().addAll("D4", "D6", "D8", "D10", "D12", "D20", "D100");
     }
 
     private String getPericiasTreinadas() {

@@ -1,7 +1,7 @@
 package br.edu.up.sistema_rpg.model.racas;
 
 import br.edu.up.sistema_rpg.model.Raca;
-import br.edu.up.sistema_rpg.model.utils.arquivos.Habilidades;
+import br.edu.up.sistema_rpg.model.utils.Habilidades;
 
 import java.util.ArrayList;
 
