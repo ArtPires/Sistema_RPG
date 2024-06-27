@@ -46,4 +46,20 @@ public class SistemaController {
     public Integer calcularCA(String valorDestreza) {
         return Modificadores.calcModificador(valorDestreza) + 10;
     }
+
+    public Integer calcularCorpo(String classe, String valorForca) {
+        return switch (classe) {
+            case "Bardo" -> Modificadores.calcModificador(valorForca);
+            case "Guerreiro" -> Modificadores.calcModificador(valorForca) + 1;
+            default -> 10;
+        };
+    }
+
+    public Integer calcularDistancia(String classe, String valorDestreza) {
+        return switch (classe) {
+            case "Bardo" -> Modificadores.calcModificador(valorDestreza);
+            case "Guerreiro" -> Modificadores.calcModificador(valorDestreza) + 1;
+            default -> 10;
+        };
+    }
 }

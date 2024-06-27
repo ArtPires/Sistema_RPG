@@ -6,6 +6,7 @@ import br.edu.up.sistema_rpg.model.utils.arquivos.Habilidades;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -18,68 +19,9 @@ public class ViewRPG implements Initializable {
 
     private final SistemaController conn = new SistemaController();
 
-    private Boolean verificador = true;
-
     @FXML private Button btEditar;
 
     @FXML private Button btSalvar;
-
-    @FXML private CheckBox cbAcrobacia;
-    @FXML private CheckBox cbAcrobaciaFicha;
-
-    @FXML private CheckBox cbAdestrarAnimais;
-    @FXML private CheckBox cbAdestrarAnimaisFicha;
-
-    @FXML private CheckBox cbAtletismo;
-    @FXML private CheckBox cbAtletismoFicha;
-
-    @FXML private CheckBox cbAtuacao;
-    @FXML private CheckBox cbAtuacaoFicha;
-
-    @FXML private CheckBox cbCavalgar;
-    @FXML private CheckBox cbCavalgarFicha;
-
-    @FXML private CheckBox cbConhecimento;
-    @FXML private CheckBox cbConhecimentoFicha;
-
-    @FXML private CheckBox cbCura;
-    @FXML private CheckBox cbCuraFicha;
-
-    @FXML private CheckBox cbDiplomacia;
-    @FXML private CheckBox cbDiplomaciaFicha;
-
-    @FXML private CheckBox cbEnganacao;
-    @FXML private CheckBox cbEnganacaoFicha;
-
-    @FXML private CheckBox cbFurtividade;
-    @FXML private CheckBox cbFurtividadeFicha;
-
-    @FXML private CheckBox cbIdentificarMagia;
-    @FXML private CheckBox cbIdentificarMagiaFicha;
-
-    @FXML private CheckBox cbIniciativa;
-    @FXML private CheckBox cbIniciativaFicha;
-
-    @FXML private CheckBox cbIntuicao;
-    @FXML private CheckBox cbIntuicaoFicha;
-
-    @FXML private CheckBox cbLadinagem;
-    @FXML private CheckBox cbLadinagemFicha;
-
-    @FXML private CheckBox cbObterInformacao;
-    @FXML private CheckBox cbObterInformacaoFicha;
-
-    @FXML private CheckBox cbOficio;
-    @FXML private CheckBox cbOficioFicha;
-
-    @FXML private CheckBox cbPercepcao;
-    @FXML private CheckBox cbPercepcaoFicha;
-
-    @FXML private CheckBox cbSobrevivencia;
-    @FXML private CheckBox cbSobrevivenciaFicha;
-
-    @FXML private CheckBox cbintimidacao;
-    @FXML private CheckBox cbintimidacaoFicha;
 
     @FXML private ChoiceBox<String> chbClasse;
 
@@ -107,10 +49,14 @@ public class ViewRPG implements Initializable {
     @FXML private TextField txfAtaqueCorpo;
     @FXML private TextField txfAtaqueDistancia;
 
-    @FXML private TextField txfFortitude;
-    @FXML private TextField txfReflexo;
-    @FXML private TextField txfVontade;
+    @FXML private HBox hbCentral;
+    @FXML private HBox hbTopo;
 
+    @FXML private Tab tabDados;
+    @FXML private TextField txfQuantidade;
+    @FXML private ChoiceBox<String> chbDado;
+    @FXML private Button btDado;
+    @FXML private Label labelResult;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -120,9 +66,16 @@ public class ViewRPG implements Initializable {
 
         btSalvar.setOnAction(e -> {
             salvarPersonagem();
-            //preencerFicha();
-            //privarTudo();
+            preencerFicha();
+            privarTudo();
+        });
 
+        btDado.setOnAction(e -> {
+            liberarTudo();
+        });
+
+        btEditar.setOnAction(e -> {
+            liberarTudo();
         });
 
         chbClasse.setOnAction(e -> {
@@ -139,17 +92,32 @@ public class ViewRPG implements Initializable {
         });
     }
 
+    private void liberarTudo() {
+        hbTopo.setDisable(false);
+        hbCentral.setDisable(false);
+    }
+
+    private void privarTudo() {
+        hbTopo.setDisable(true);
+        hbCentral.setDisable(true);
+    }
+
+    private void preencerFicha() {
+        adicionarPontosDeVida();
+        adicionarClasseDeArmadura();
+        adicionarCorpoACorpo();
+        adicionarDistancia();
+    }
+
     private void salvarPersonagem() {
         String filePath = "Personagens.txt";
         try {
             FileManager.adicionarConteudo(filePath, txfNome.getText());
-            verificador = true;
         } catch (IOException e) {
             Alert dialog = new Alert(Alert.AlertType.ERROR);
             dialog.setTitle("ERRO");
             dialog.setHeaderText(e.fillInStackTrace().toString());
             dialog.showAndWait();
-            verificador = false;
         }
     }
 
@@ -241,7 +209,10 @@ public class ViewRPG implements Initializable {
     }
 
     private void adicionarCorpoACorpo(){
-
+        txfAtaqueCorpo.setText(String.valueOf(conn.calcularCorpo(chbClasse.getValue(), txfForca.getText())));
     }
 
+    private void adicionarDistancia(){
+        txfAtaqueDistancia.setText(String.valueOf(conn.calcularCorpo(chbClasse.getValue(), txfDestreza.getText())));
+    }
 }
