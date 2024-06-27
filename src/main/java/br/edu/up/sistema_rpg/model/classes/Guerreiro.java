@@ -11,6 +11,7 @@ import java.util.List;
 public class Guerreiro implements Classe {
 
     private static final Integer PERICIAS_TREINADAS = 2;
+    private static final Integer PONTOS_DE_VIDA = 20;
     private final List<Pericias> pericias = new ArrayList<>();
     private final ArrayList<HabilidadesDeRaca> habilidadesDeRaca = new ArrayList<>();
 
@@ -18,6 +19,10 @@ public class Guerreiro implements Classe {
 
     public static Integer calcularPericiasTreinadas(Integer modificadorInteligencia) {
         return PERICIAS_TREINADAS + Modificadores.calcModificador(modificadorInteligencia);
+    }
+
+    public static Integer calcularPV(Integer valorConstituicao) {
+        return PONTOS_DE_VIDA + Modificadores.calcModificador(valorConstituicao);
     }
 
     @Override
