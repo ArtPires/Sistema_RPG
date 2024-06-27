@@ -8,17 +8,10 @@ public class SistemaController {
     public SistemaController(){ }
 
     public Integer calcPericiasTreinadas(String classe, String valorInteligencia) throws Exception{
-        switch (classe){
-            case "Bardo":
-                //Bardo.calcularPericiasTreinadas(valorInteligencia);
-                break;
-
-            case "Guerreiro":
-                return Guerreiro.calcularPericiasTreinadas(Integer.valueOf(valorInteligencia));
-
-            default:
-                throw new RuntimeException("A classe selecionada não é válida");
-        }
-        return null;
+        return switch (classe) {
+            case "Bardo" -> Bardo.calcularPericiasTreinadas(Integer.valueOf(valorInteligencia));
+            case "Guerreiro" -> Guerreiro.calcularPericiasTreinadas(Integer.valueOf(valorInteligencia));
+            default -> throw new Exception("A classe selecionada não é válida");
+        };
     }
 }

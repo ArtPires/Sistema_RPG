@@ -1,17 +1,31 @@
 package br.edu.up.sistema_rpg.model.classes;
 
 import br.edu.up.sistema_rpg.model.Classe;
+import br.edu.up.sistema_rpg.model.utils.HabilidadesDeRaca;
+import br.edu.up.sistema_rpg.model.utils.Modificadores;
+
+import java.util.ArrayList;
 
 public class Bardo implements Classe {
 
+    private static final Integer PERICIAS_TREINADAS = 6;
 
-    @Override
-    public void adicionarPericias() {
-
+    public static Integer calcularPericiasTreinadas(Integer valorInteligencia) {
+        return PERICIAS_TREINADAS + Modificadores.calcModificador(valorInteligencia);
     }
 
     @Override
     public Integer calcularValorDePericias() {
         return 0;
+    }
+
+    @Override
+    public Integer calcularModificadorDePericias() {
+        return 0;
+    }
+
+    @Override
+    public ArrayList<HabilidadesDeRaca> preencherHabilidades() {
+        return null;
     }
 }
